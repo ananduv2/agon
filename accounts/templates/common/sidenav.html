@@ -1,0 +1,7 @@
+{% if account.type == 'admin' %}
+    {% include 'admin/sidenav.html' %}
+{% elif account.type == 'student' %}
+    {% include 'students/sidenav.html' %}
+{% else %}
+    {% include 'common/public_sidenav.html' %}
+{% endif %}

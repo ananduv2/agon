@@ -31,6 +31,8 @@ urlpatterns = [
     path('administrator/admin/list/',AdminList.as_view(), name='admin_list'),
     path('administrator/student/list/',StudentList.as_view(), name='student_list'),
     path('administrator/add/event/',AddEvent.as_view(), name='add_event'),
+    path('administrator/edit/event/<id>/',EditEvent.as_view(), name='edit_event'),
+    path('administrator/delete/event/<id>/',DeleteEvent.as_view(), name='delete_event'),
 
     path('user/events/',ViewEvents.as_view(), name='view_events'),
 ]

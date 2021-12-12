@@ -1,0 +1,76 @@
+{% extends 'common/dashboard_main.html' %}
+{% load static %}
+{% block content %}
+
+
+<!--== MAIN CONTRAINER ==-->
+{% include 'common/topbar.html' %}
+
+<!--== BODY CONTNAINER ==-->
+<div class="container-fluid sb2">
+    <div class="row">
+        {% include 'common/sidenav.html' %}
+
+        <!--== BODY INNER CONTAINER ==-->
+        <div class="sb2-2">
+            <!--== breadcrumbs ==-->
+            <div class="sb2-2-2">
+                <ul>
+                    <li><a href="{% url 'index' %}"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
+                    </li>
+                    <li class="active-bre"><a href="#"> Event List</a>
+                    </li>
+                    <li class="page-back"><a href="{% url 'index' %}"><i class="fa fa-backward" aria-hidden="true"></i> Back</a>
+                    </li>
+                </ul>
+            </div>
+            <!--== DASHBOARD INFO ==-->
+            
+            <!--== User Details ==-->
+            <div class="sb2-2-1">
+                <div class="inn-title">
+                    <h4>All listing Categories</h4>
+                    <p>Airtport Hotels The Right Way To Start A Short Break Holiday</p>
+                </div>
+                <div class="bor">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Event Name</th>
+                                <th>Entry Date</th>
+                                <th>Last Date</th>
+                                <th>Details</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for i in event %}
+                            <tr>
+                                <td>{{forloop.counter}}</td>
+                                <td>{{i.name}}</td>
+                                <td>{{i.entry_date}}</td>
+                                <td>{{i.last_date}}</td>
+                                <td>{{i.details}}</td>
+                                {% if account.type == 'admin' %}
+                                <td><a href="{% url 'edit_event' i.id %}" class="sb2-2-1-edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                </td>
+                                <td><a href="{% url 'delete_event' i.id %}" class="sb2-2-1-edit"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                </td>
+                                {% endif %}
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+        </div>
+
+    </div>
+</div>
+
+<!--== BOTTOM FLOAT ICON ==-->
+
+
+
+{% endblock %}

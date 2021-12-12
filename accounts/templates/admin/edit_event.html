@@ -1,0 +1,101 @@
+{% extends 'common/dashboard_main.html' %}
+{% load static %}
+{% block content %}
+
+    <!--== MAIN CONTRAINER ==-->
+    {% include 'common/topbar.html' %}
+
+    <!--== BODY CONTNAINER ==-->
+    <div class="container-fluid sb2">
+        <div class="row">
+            {% include 'admin/sidenav.html' %}
+
+            <!--== BODY INNER CONTAINER ==-->
+            <div class="sb2-2">
+                <!--== breadcrumbs ==-->
+                <div class="sb2-2-2">
+                    <ul>
+                        <li><a href="{% url 'index' %}"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
+                        </li>
+                        <li class="active-bre"><a href="#"> Edit Event</a>
+                        </li>
+                        <li class="page-back"><a href="{% url 'index' %}"><i class="fa fa-backward" aria-hidden="true"></i> Back</a>
+                        </li>
+                    </ul>
+                </div>
+                <!--== DASHBOARD INFO ==-->
+                
+                <!--== User Details ==-->
+                <div class="sb2-2-3">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="box-inn-sp">
+                                <div class="inn-title">
+                                    <h4>Edit Event</h4>
+                                </div>
+                                <div class="tab-inn">
+                                    <form method="post" action>
+                                        {% csrf_token %}
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                {% load widget_tweaks %} 
+                                                {% render_field form.name class="validate" type="text" %}
+                                                <label for="first_name1">Name</label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                <p>Entry Date</p>
+                                                {% render_field form.entry_date class="datepicker" placeholder="Entry Date" required="true" type="date" %}
+                                                <!-- <label for="last_name">Entry Date</label> -->
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                <p>Last Date</p>
+                                                {% render_field form.last_date class="validate" required="true" type="date" %}
+                                                <!-- <label for="phone">Last Date</label> -->
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                {% render_field form.details class="validate" required="true"  rows="6" %}
+                                                <label for="password">Description</label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                <div class="file-field input-field">
+                                                    <div class="btn">
+                                                        <span>File</span>
+                                                        <input type="file">
+                                                    </div>
+                                                    <div class="file-path-wrapper">
+                                                        {% render_field form.poster class="file-path validate" type="text" %}
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                <input type="submit" class="btn btn-secondary" value="Submit">
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+            </div>
+
+        </div>
+    </div>
+
+    <!--== BOTTOM FLOAT ICON ==-->
+    
+
+{% endblock %}

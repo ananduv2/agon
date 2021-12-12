@@ -163,6 +163,51 @@ class ViewEvents(View):
         else:
             return redirect('index')
 
+class EditEvent(View):
+    def get(self, request,id):
+        x = AdminCheck(request)
+        if x == True:
+            user = request.user
+            account = Account.objects.get(user=user)
+            event = Event.objects.get(id=id)
+            form = AddEventForm(instance=event)
+            context = {'account': account,'form': form,'event': event}
+            return render(request, 'admin/edit_event.html', context)
+        else:
+            return redirect('home')
+
+    def post(self, request,id):
+        x = AdminCheck(request)
+        if x == True:
+            user = request.user
+            account = Account.objects.get(user=user)
+            event = Event.objects.get(id=id)
+            form = AddEventForm(request.POST,request.FILES,instance=event)
+            if form.is_valid:
+                form.save()
+                return redirect('view_events')
+            else:
+                context = {'account': account,'form': form,'event':event}
+                return render(request, 'admin/edit_event.html', context)
+        else:
+            return redirect('home')
+
+class DeleteEvent(View):
+    def get(self, request,id):
+        x = AdminCheck(request)
+        if x == True:
+            event = Event.objects.get(id=id)
+            event.delete()
+            return redirect('view_events')
+        else:
+            return redirect('home')
+
+
+    
+
+
+
+
 
 
 
