@@ -87,4 +87,14 @@ class Event(models.Model):
     def __str__(self):
         return self.name
 
+class Entry(models.Model):
+    student = models.ForeignKey(Account,on_delete=models.CASCADE,null=True, blank=True,limit_choices_to={'type':'student'})
+    event = models.ForeignKey(Event,on_delete=models.CASCADE,null=True, blank=True)
+    url = models.CharField(max_length=1500)
+    status = models.CharField(max_length=150,choices=approval_choices,default='Pending')
+
+    def __str__(self):
+        return ("%s_%s") % (self.student,self.event)
+
+
 

@@ -1,0 +1,69 @@
+{% extends 'common/dashboard_main.html' %}
+{% load static %}
+{% block content %}
+
+    <!--== MAIN CONTRAINER ==-->
+    {% include 'common/topbar.html' %}
+
+    <!--== BODY CONTNAINER ==-->
+    <div class="container-fluid sb2">
+        <div class="row">
+            {% include 'common/sidenav.html' %}
+
+            <!--== BODY INNER CONTAINER ==-->
+            <div class="sb2-2">
+                <!--== breadcrumbs ==-->
+                <div class="sb2-2-2">
+                    <ul>
+                        <li><a href="{% url 'index' %}"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
+                        </li>
+                        <li><a href="{% url 'view_events' %}"><i class="fa fa-home" aria-hidden="true"></i> Events</a>
+                        </li>
+                        <li class="active-bre"><a href="#">Submit Entry</a>
+                        </li>
+                        <li class="page-back"><a href="{% url 'index' %}"><i class="fa fa-backward" aria-hidden="true"></i> Back</a>
+                        </li>
+                    </ul>
+                </div>
+                <!--== DASHBOARD INFO ==-->
+                
+                <!--== User Details ==-->
+                <div class="sb2-2-3">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="box-inn-sp">
+                                <div class="inn-title">
+                                    <h4>Submit Entry</h4>
+                                </div>
+                                <div class="tab-inn">
+                                    <form method="post" action>
+                                        {% csrf_token %}
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                {% load widget_tweaks %} 
+                                                {% render_field form.url class="validate" type="text" %}
+                                                <label for="first_name1">url</label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                <input type="submit" class="btn btn-secondary" value="Submit">
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+            </div>
+
+        </div>
+    </div>
+
+    <!--== BOTTOM FLOAT ICON ==-->
+    
+
+{% endblock %}

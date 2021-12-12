@@ -240,6 +240,59 @@ class StudentDashboard(View):
             return render(request, 'students/dashboard.html', context)
         else:
             return redirect('home')
+
+class SubmitEntry(View):
+    def get(self, request,id):
+        user = request.user
+        if user.is_authenticated:
+            account = Account.objects.get(user=user)
+            event = Event.objects.get(id=id)
+            form = EntryForm()
+            entry = Entry.objects.get(student=account, event=event)
+            if entry:
+                return redirect('view_events')
+            else:
+                context = {'form': form, 'account': account,'event':event}
+                return render(request,'students/submit.html', context)
+        else:
+            return redirect('home')
+
+    def post(self, request,id):
+        user = request.user
+        if user.is_authenticated:
+            account = Account.objects.get(user=user)
+            event = Event.objects.get(id=id)
+            form = EntryForm(request.POST)
+            if form.is_valid():
+                f = form.save(commit=False)
+                f.student = account
+                f.event = event
+                f.save()
+                return redirect('view_events')
+            else:
+                context = {'form': form, 'account': account,'event':event}
+                return render(request,'students/submit.html', context)
+        else:
+            return redirect('home')
+
+class ViewEntries(View):
+    def get(self, request,id):
+        x = AdminCheck(request)
+        if x == True:
+            user = request.user
+            account = Account.objects.get(user=user)
+            event = Event.objects.get(id=id)
+            entry = Entry.objects.filter(event=event)
+            context = {'account': account,'event':event,'entry':entry}
+            return render(request, 'admin/entries.html', context)
+        else:
+            return redirect('home')
+
+                
+
+
+
+
         
             
 

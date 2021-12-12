@@ -20,3 +20,8 @@ class DataForm(ModelForm):
     class Meta:
         model = Account
         fields = ['name','email']
+
+class EntryForm(ModelForm):
+    class Meta:
+        model = Entry
+        fields = ['url']

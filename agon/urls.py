@@ -34,8 +34,10 @@ urlpatterns = [
     path('administrator/add/event/',AddEvent.as_view(), name='add_event'),
     path('administrator/edit/event/<id>/',EditEvent.as_view(), name='edit_event'),
     path('administrator/delete/event/<id>/',DeleteEvent.as_view(), name='delete_event'),
+    path('administrator/entry/view/<id>/',ViewEntries.as_view(), name='view_entry'),
 
     path('student/dashboard/',StudentDashboard.as_view(), name='student_dashboard'),
+    path('student/submit/entry/<id>/',SubmitEntry.as_view(), name='submit_entry'),
 
     path('user/events/',ViewEvents.as_view(), name='view_events'),
 ]
