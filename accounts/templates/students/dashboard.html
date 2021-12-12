@@ -1,0 +1,57 @@
+{% extends 'common/dashboard_main.html' %}
+{% load static %}
+{% block content %}
+
+    <!--== MAIN CONTRAINER ==-->
+    {% include 'common/topbar.html' %}
+
+    <!--== BODY CONTNAINER ==-->
+    <div class="container-fluid sb2">
+        <div class="row">
+            {% include 'common/sidenav.html' %}
+
+            <!--== BODY INNER CONTAINER ==-->
+            <div class="sb2-2">
+                <!--== breadcrumbs ==-->
+                <div class="sb2-2-2">
+                    <ul>
+                        <li><a href="{% url 'index' %}"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
+                        </li>
+                        <li class="active-bre"><a href="#"> Dashboard</a>
+                        </li>
+                        <li class="page-back"><a href="{% url 'index' %}"><i class="fa fa-backward" aria-hidden="true"></i> Back</a>
+                        </li>
+                    </ul>
+                </div>
+                <!--== DASHBOARD INFO ==-->
+                <div class="ad-v2-hom-info">
+					<div class="ad-v2-hom-info-inn">
+						<ul>
+							
+							<li>
+								<div class="ad-hom-box ad-hom-box-3">
+									<span class="ad-hom-col-com ad-hom-col-3"><i class="far fa-calendar-alt"></i></span>
+									<div class="ad-hom-view-com">
+									<h5>Active Events</h5>
+									<h3>{{active_events}}</h3>
+									</div>
+								</div>
+							</li>
+							
+						</ul>
+					</div>
+                </div>
+
+                <!--== User Details ==-->
+                
+                
+
+                
+
+                
+                
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

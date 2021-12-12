@@ -26,6 +26,7 @@ urlpatterns = [
     path('login/', LoginView.as_view(), name='login'),
     path('logout/', LogoutView.as_view(),name='logout'),
     path('home/', Home.as_view(), name='home'),
+    path('signup/',StudentSignUP.as_view(), name='signup'),
 
     path('administrator/dashboard/',AdminDashboard.as_view(), name='admin_dashboard'),
     path('administrator/admin/list/',AdminList.as_view(), name='admin_list'),
@@ -33,6 +34,8 @@ urlpatterns = [
     path('administrator/add/event/',AddEvent.as_view(), name='add_event'),
     path('administrator/edit/event/<id>/',EditEvent.as_view(), name='edit_event'),
     path('administrator/delete/event/<id>/',DeleteEvent.as_view(), name='delete_event'),
+
+    path('student/dashboard/',StudentDashboard.as_view(), name='student_dashboard'),
 
     path('user/events/',ViewEvents.as_view(), name='view_events'),
 ]

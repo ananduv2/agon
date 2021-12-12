@@ -1,0 +1,79 @@
+{% extends 'common/main.html' %}
+{% load static %}
+{% block content %}
+<!-- ==========Sign-In-Section========== -->
+<section class="account-section bg_img" data-background="{% static 'assets/images/account/account-bg.jpg' %}">
+    <div class="container">
+        <div class="padding-top padding-bottom">
+            <div class="account-area">
+                <div class="section-header-3">
+                    <span class="cate">welcome</span>
+                    <h2 class="title">to Agon </h2>
+                </div>
+                <form class="account-form" method="post" action>
+                    {% csrf_token %}
+                    {% if form.errors %}
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <div class="form-group label-floating">
+                                <div class="alert alert-danger" style="margin-left:20px">
+                                    <code>{{ error }}</code>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                {% endif %}
+                {% if dataform.errors %}
+                    {% for field in dataform %}
+                        {% for error in field.errors %}
+                            <div class="form-group label-floating">
+                                <div class="alert alert-danger" style="margin-left:20px">
+                                    <code>{{ error }}</code>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                {% endif %}
+                {% if msg %}
+                <div class="alert alert-danger" style="margin-left:20px">
+                    <code>{{ msg }}</code>
+                </div>
+                {% endif %}
+                    <div class="form-group">
+                        <label for="email1">KTU ID<span>*</span></label>
+                        {% load widget_tweaks %}
+                        {% render_field form.username type="text" placeholder="Enter Your KTU ID" required="true" %}
+                    
+                    </div>
+                    <div class="form-group">
+                        <label for="pass1">Password<span>*</span></label>
+                        {% render_field form.password1 type="password" placeholder="Enter Your password" required="true" %}
+                    </div>
+                    <div class="form-group">
+                        <label for="pass2">Confirm Password<span>*</span></label>
+                        {% render_field form.password2 type="password" placeholder="confirm Your password" required="true" %}
+                    </div>
+                    <div class="form-group">
+                        <label for="pass1">Name<span>*</span></label>
+                        {% render_field dataform.name type="text" placeholder="Enter Your Name" required="true" %}
+                    </div>
+                    <div class="form-group">
+                        <label for="pass1">Email<span>*</span></label>
+                        {% render_field dataform.email type="email" placeholder="Enter Your Email" required="true" %}
+                    </div>
+                    
+                    <div class="form-group text-center">
+                        <input type="submit" value="Sign Up">
+                    </div>
+                </form>
+                <div class="option">
+                    Already have an account? <a href="{% url 'login' %}">Login</a>
+                </div>
+                
+                
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ==========Sign-In-Section========== -->
+{% endblock %}

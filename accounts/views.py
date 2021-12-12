@@ -64,12 +64,9 @@ class Home(View):
                 if u.type == 'admin':
                     return redirect('admin_dashboard')
                     # return HttpResponse("Admin Dashboard")
-                elif u.type == 'organizer':
-                    return HttpResponse("Service Provider")
-                    # return redirect('provider_dashboard')
                 elif u.type == 'student':
-                    return HttpResponse("Public")
-                    # return redirect('user_dashboard')
+                    # return HttpResponse("Student")
+                    return redirect('student_dashboard')
                 else:
                     return redirect('logout')
             except:
@@ -201,6 +198,56 @@ class DeleteEvent(View):
             return redirect('view_events')
         else:
             return redirect('home')
+
+
+class StudentSignUP(View):
+    def get(self, request):
+        form = StudentSignUpForm()
+        dataform = DataForm()
+        print(dataform)
+        context = {'form': form,'dataform':dataform}
+        return render(request, 'common/signup.html', context)
+    
+    def post(self, request):
+        form = StudentSignUpForm(request.POST)
+        dataform = DataForm(request.POST)
+        msg = "Invalid registration id format"
+        context = {'form': form,'dataform':dataform,'msg':msg}
+        if form.is_valid() and dataform.is_valid():
+            f = form.save(commit=False)
+            username = f.username.upper()
+            string1 = "TVE"
+            string2 = "MCA"
+            if string1 in username and string2 in username:
+                f.save()
+                d = dataform.save(commit=False)
+                d.user = f
+                d.type = 'student'
+                d.save()
+                return redirect('login')
+            else:
+                return render(request, 'common/signup.html', context)
+        else:
+            return render(request, 'common/signup.html', context)
+
+class StudentDashboard(View):
+    def get(self, request):
+        user = request.user
+        if user.is_authenticated:
+            account = Account.objects.get(user=user)
+            events = Event.objects.all().count()
+            context = {'account':account,'active_events': events}
+            return render(request, 'students/dashboard.html', context)
+        else:
+            return redirect('home')
+        
+            
+
+            
+
+
+
+
 
 
     

@@ -10,3 +10,13 @@ class AddEventForm(ModelForm):
     class Meta:
         model = Event
         fields = '__all__'
+
+class StudentSignUpForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields =['username','password1','password2']
+
+class DataForm(ModelForm):
+    class Meta:
+        model = Account
+        fields = ['name','email']
