@@ -42,7 +42,6 @@ states = (
 
 user_type=(
     ('admin','admin'),
-    ('organizer','organizer'),
     ('student','student'),
 )
 
@@ -83,6 +82,7 @@ class Event(models.Model):
     entry_date = models.DateField()
     last_date = models.DateField()
     details = models.TextField()
+    poster = models.ImageField(upload_to='poster',null=True, blank=True, default='accounts/static/assets/images/blog/blog02.jpg')
 
     def __str__(self):
         return self.name

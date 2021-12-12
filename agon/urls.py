@@ -29,8 +29,10 @@ urlpatterns = [
 
     path('administrator/dashboard/',AdminDashboard.as_view(), name='admin_dashboard'),
     path('administrator/admin/list/',AdminList.as_view(), name='admin_list'),
-    path('administrator/organizer/list/',OrganizerList.as_view(), name='organizer_list'),
     path('administrator/student/list/',StudentList.as_view(), name='student_list'),
+    path('administrator/add/event/',AddEvent.as_view(), name='add_event'),
+
+    path('user/events/',ViewEvents.as_view(), name='view_events'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

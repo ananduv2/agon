@@ -14,15 +14,17 @@ from django.utils import timezone
 
 from .models import *
 from .functions import *
+from .forms import *
 # Create your views here.
 
 class IndexView(View):
     def get(self, request):
+        events = Event.objects.all()
         try:
             user = request.user
-            context={'user': user}
+            context={'user': user,'events': events}
         except:
-            context = {}
+            context = {'events': events}
         return render(request, 'common/index.html',context)
 
 class LoginView(View):
@@ -81,15 +83,16 @@ class AdminDashboard(View):
         if x == True:
             user = request.user
             admin = Account.objects.get(user=user)
-            organizers = Account.objects.filter(type='organizer').count()
+            admins = Account.objects.filter(type='admin').count()
             students = Account.objects.filter(type='student').count()
-            event = Event.objects.all()
-            id = []
-            for i in event:
-                if i.last_date > datetime.datetime.now :
-                    id.append(i.id)
-            active_events=event.exclude(id__in=id).count()      
-            context = {'account': admin,'organizers':organizers,'students':students,'event':event,'active_events':active_events}
+            # event = Event.objects.all()
+            # id = []
+            # for i in event:
+            #     if i.last_date > datetime.datetime.now :
+            #         id.append(i.id)
+            # active_events=event.exclude(id__in=id).count()
+            active_events = Event.objects.all().count()     
+            context = {'account': admin,'admins':admins,'students':students,'active_events':active_events}
             return render(request,'admin/dashboard.html', context)
         else:
             return redirect('home')
@@ -100,22 +103,9 @@ class AdminList(View):
         if x == True:
             user = request.user
             account = Account.objects.get(user=user)
-            admins = Account.objects.filter(type='admin')
-            print(admins)
+            admins = Account.objects.filter(type='admin').exclude(user=user)
             context = {'account': account,'admins': admins}
             return render(request,'admin/admin_list.html', context)
-        else:
-            return redirect('home')
-
-class OrganizerList(View):
-    def get(self, request):
-        x = AdminCheck(request)
-        if x == True:
-            user = request.user
-            account = Account.objects.get(user=user)
-            organizers = Account.objects.filter(type='organizer')
-            context = {'account': account,'organizers': organizers}
-            return render(request,'admin/organizer_list.html', context)
         else:
             return redirect('home')
 
@@ -131,6 +121,51 @@ class StudentList(View):
             return render(request,'admin/student_list.html', context)
         else:
             return redirect('home')
+
+
+class AddEvent(View):
+    def get(self, request):
+        x = AdminCheck(request)
+        if x == True:
+            user = request.user
+            account = Account.objects.get(user=user)
+            form = AddEventForm()
+            context = {'account':account, 'form':form}
+            return render(request, 'admin/add_event.html', context)
+        else:
+            return redirect('home')
+
+    def post(self, request):
+        x = AdminCheck(request)
+        if x == True:
+            user = request.user
+            account = Account.objects.get(user=user)
+            form = AddEventForm(request.POST)
+            if form.is_valid:
+                form.save()
+                return HttpResponse("events")
+            else:
+                context = {'account':account, 'form':form}
+            return render(request, 'admin/add_event.html', context)
+        else:
+            return redirect('home')
+
+
+class ViewEvents(View):
+    def get(self, request):
+        user = request.user
+        if user.is_authenticated:
+            user = request.user
+            account = Account.objects.get(user=user)
+            event = Event.objects.all()
+            context = {'account':account,'event': event}
+            return render(request, 'common/events.html', context)
+        else:
+            return redirect('index')
+
+
+
+
 
 
 

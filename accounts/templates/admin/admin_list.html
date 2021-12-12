@@ -3,7 +3,7 @@
 {% block content %}
 
     <!--== MAIN CONTRAINER ==-->
-    {% include 'admin/topbar.html' %}
+    {% include 'common/topbar.html' %}
 
     <!--== BODY CONTNAINER ==-->
     <div class="container-fluid sb2">
@@ -55,7 +55,15 @@
                                                     </td>
                                                     <td>{{i.mob}}</td>
                                                     <td>{{i.email}}</td>
-                                                    
+                                                    {% if request.user.is_superuser %}
+                                                    <td>
+                                                        <a href="" ><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                                        
+                                                    </td>
+                                                    <td>
+                                                        <a href=""><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                                    </td>
+                                                    {% endif %}
                                                 </tr>
                                                 {% empty %}
                                                 <tr>

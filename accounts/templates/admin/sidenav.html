@@ -19,8 +19,8 @@
                 <div class="collapsible-body left-sub-menu">
                     <ul>
                         <li><a href="{% url 'admin_list' %}">Admins</a></li>
-                        <li><a href="{% url 'organizer_list' %}">Organizers</a></li>
                         <li><a href="{% url 'student_list' %}">Students</a></li>
+                        <li><a href="{% url 'student_list' %}">Add Students</a></li>
                     </ul>
                 </div>
             </li>
@@ -75,9 +75,9 @@
             <li><a href="javascript:void(0)" class="collapsible-header"><i class="fa fa-calendar-o" aria-hidden="true"></i> Events</a>
                 <div class="collapsible-body left-sub-menu">
                     <ul>
-                        <li><a href="event-all.html">All Events</a>
+                        <li><a href="{% url 'view_events' %}">All Events</a>
                         </li>
-                        <li><a href="event-add.html">Add New Event</a>
+                        <li><a href="{% url 'add_event' %}">Add New Event</a>
                         </li>
                     </ul>
                 </div>

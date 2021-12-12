@@ -3,7 +3,7 @@
 {% block content %}
 
     <!--== MAIN CONTRAINER ==-->
-    {% include 'admin/topbar.html' %}
+    {% include 'common/topbar.html' %}
 
     <!--== BODY CONTNAINER ==-->
     <div class="container-fluid sb2">
@@ -31,8 +31,8 @@
 								<div class="ad-hom-box ad-hom-box-1">
 									<span class="ad-hom-col-com ad-hom-col-1"><i class="fa fa-users"></i></span>
 									<div class="ad-hom-view-com">
-									<h5>Organizers</h5>
-									<h3>{{organizers}}</h3>
+									<h5>Admin</h5>
+									<h3>{{admins}}</h3>
 									</div>
 								</div>
 							</li>
@@ -68,7 +68,7 @@
                 </div>
 
                 <!--== User Details ==-->
-                {% include 'admin/mini/organizer_list.html' %}
+                
                 <div class="sb2-2-3">
                     <div class="row">
                         <!--== Listing Enquiry ==-->
