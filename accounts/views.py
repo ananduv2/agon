@@ -100,8 +100,9 @@ class AdminList(View):
         if x == True:
             user = request.user
             account = Account.objects.get(user=user)
-            admins = Account.objects.exclude(user=user)
-            context = {'account': account,'admin': admins}
+            admins = Account.objects.filter(type='admin')
+            print(admins)
+            context = {'account': account,'admins': admins}
             return render(request,'admin/admin_list.html', context)
         else:
             return redirect('home')

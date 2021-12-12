@@ -14,13 +14,13 @@
     <!--== LEFT MENU ==-->
     <div class="sb2-13">
         <ul class="collapsible" data-collapsible="accordion">
-            <li><a href="" ><i class="ti ti-home"></i> Dashboard</a></li>
+            <li><a href="{% url 'home' %}" ><i class="ti ti-home"></i> Dashboard</a></li>
             <li><a href="javascript:void(0)" class="collapsible-header"><i class="fa fa-user" aria-hidden="true"></i>Users</a>
                 <div class="collapsible-body left-sub-menu">
                     <ul>
-                        <li><a href="listing-all.html">Admins</a></li>
-                        <li><a href="listing-add.html">Organizers</a></li>
-                        <li><a href="listing-cat-all.html">Students</a></li>
+                        <li><a href="{% url 'admin_list' %}">Admins</a></li>
+                        <li><a href="{% url 'organizer_list' %}">Organizers</a></li>
+                        <li><a href="{% url 'student_list' %}">Students</a></li>
                     </ul>
                 </div>
             </li>

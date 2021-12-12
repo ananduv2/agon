@@ -72,7 +72,7 @@ class Account(models.Model):
     age = models.IntegerField(null=True, blank=True)
     type = models.CharField(max_length=20,choices=user_type)
     approval = models.CharField(max_length=20,choices=approval_choices,default='Pending')
-    profilepic = models.ImageField(upload_to='documents',null=True, blank=True,default='images/user3.png')
+    profilepic = models.ImageField(upload_to='documents',null=True, blank=True,default='accounts/static/images/user3.png')
 
     def __str__(self):
         return self.name
