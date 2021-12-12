@@ -5,3 +5,4 @@ from .models import *
 admin.site.register(Account)
 admin.site.register(Event)
 admin.site.register(Entry)
+admin.site.register(Result)

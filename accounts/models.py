@@ -96,5 +96,13 @@ class Entry(models.Model):
     def __str__(self):
         return ("%s_%s") % (self.student,self.event)
 
+class Result(models.Model):
+    event = models.ForeignKey(Event,on_delete=models.CASCADE)
+    result = models.TextField()
+
+    
+
+
+
 
 

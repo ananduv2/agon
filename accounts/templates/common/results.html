@@ -29,41 +29,23 @@
             <!--== User Details ==-->
             <div class="sb2-2-1">
                 <div class="inn-title">
-                    <h4>All listing Categories</h4>
-                    <p>Airtport Hotels The Right Way To Start A Short Break Holiday</p>
+                    <h4>All Results</h4>
                 </div>
                 <div class="bor">
                     <table class="table">
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Event Name</th>
-                                <th>Entry Date</th>
-                                <th>Last Date</th>
-                                <th>Details</th>
+                                <th>Event</th>
+                                <th>Result</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {% for i in event %}
+                            {% for i in result %}
                             <tr>
                                 <td>{{forloop.counter}}</td>
-                                <td>{{i.name}}</td>
-                                <td>{{i.entry_date}}</td>
-                                <td>{{i.last_date}}</td>
-                                <td>{{i.details}}</td>
-                                {% if account.type == 'admin' %}
-                                <td><a href="{% url 'edit_event' i.id %}" class="sb2-2-1-edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                                </td>
-                                <td><a href="{% url 'delete_event' i.id %}" class="sb2-2-1-edit"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
-                                </td>
-                                <td><a href="{% url 'view_entry' i.id %}" class="sb2-2-1-edit">View Entry</a>
-                                </td>
-                                <td><a href="{% url 'publish_result' i.id %}" class="sb2-2-1-edit">Publish Result</a>
-                                </td>
-                                {% elif account.type == 'student' %}
-                                <td><a href="{% url 'submit_entry' i.id %}" class="sb2-2-1-edit">Submit Entry</a>
-                                </td>
-                                {% endif %}
+                                <td>{{i.event.name}}</td>
+                                <td>{{i.result}}</td>
                             </tr>
                             {% endfor %}
                         </tbody>

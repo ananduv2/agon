@@ -25,3 +25,8 @@ class EntryForm(ModelForm):
     class Meta:
         model = Entry
         fields = ['url']
+
+class ResultForm(ModelForm):
+    class Meta:
+        model = Result
+        fields = ['result']

@@ -288,6 +288,55 @@ class ViewEntries(View):
         else:
             return redirect('home')
 
+class PublishResult(View):
+    def get(self, request,id):
+        x = AdminCheck(request)
+        if x == True:
+            user = request.user
+            account = Account.objects.get(user=user)
+            event = Event.objects.get(id=id)
+            form = ResultForm()
+            try:
+                result = Result.objects.get(event=event)
+                return redirect('view_events')
+            except:
+                context = {'account': account,'event':event,'form':form}
+                return render(request, 'admin/publish_result.html', context)
+        else:
+            return redirect('home')
+
+    def post(self, request,id):
+        x = AdminCheck(request)
+        if x == True:
+            user = request.user
+            account = Account.objects.get(user=user)
+            event = Event.objects.get(id=id)
+            form = ResultForm(request.POST)
+            if form.is_valid():
+                f = form.save(commit=False)
+                f.event = event
+                f.save()
+                return redirect('view_events')
+            else:
+                context = {'account': account,'event':event,'form':form}
+                return render(request, 'admin/publish_result.html', context)
+        else:
+            return redirect('home')
+
+class ViewResults(View):
+    def get(self, request):
+        user = request.user
+        if user.is_authenticated:
+            account = Account.objects.get(user=user)
+            result = Result.objects.all()
+            context = {'account':account,'result': result}
+            return render(request, 'common/results.html', context)
+        else:
+            return redirect('home')
+        
+
+
+
                 
 
 
