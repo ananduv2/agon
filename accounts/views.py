@@ -113,7 +113,7 @@ class StudentList(View):
         if x == True:
             user = request.user
             account = Account.objects.get(user=user)
-            student = Account.objects.filter(type='organizer')
+            student = Account.objects.filter(type='student')
             context = {'account': account,'student': student}
             return render(request,'admin/student_list.html', context)
         else:

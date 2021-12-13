@@ -17,7 +17,7 @@
                     <ul>
                         <li><a href="{% url 'index' %}"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
                         </li>
-                        <li class="active-bre"><a href="#"> Admin List</a>
+                        <li class="active-bre"><a href="#">Student List</a>
                         </li>
                         <li class="page-back"><a href="{% url 'index' %}"><i class="fa fa-backward" aria-hidden="true"></i> Back</a>
                         </li>
@@ -39,31 +39,25 @@
                                         <table class="table table-hover">
                                             <thead>
                                                 <tr>
+                                                    <th>#</th>
                                                     <th>User</th>
                                                     <th>Name</th>
+                                                    <th>KTU ID</th>
                                                     <th>Email</th>
-                                                    <th>Year</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                {% for i in students %}
+                                                {% for i in student %}
                                                 
                                                 <tr>
+                                                    <td>{{forloop.counter}}</td>
                                                     <td><span class="list-img"><img src="{{i.profilepic.url}}" alt=""></span>
                                                     </td>
-                                                    <td><a href="#"><span class="list-enq-name">{{i.name|title}}</span><span class="list-enq-city">{{i.KTUID}}</span></a>
+                                                    <td><a href="#"><span class="list-enq-name">{{i.name|title}}</span></a>
                                                     </td>
-                                                    <td>{{i.mob}}</td>
+                                                    <td>{{i.user}}</td>
                                                     <td>{{i.email}}</td>
-                                                    {% if request.user.is_superuser %}
-                                                    <td>
-                                                        <a href="" ><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                                                        
-                                                    </td>
-                                                    <td>
-                                                        <a href=""><i class="fa fa-trash" aria-hidden="true"></i></a>
-                                                    </td>
-                                                    {% endif %}
+                                                    
                                                 </tr>
                                                 {% empty %}
                                                 <tr>
