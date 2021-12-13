@@ -137,10 +137,10 @@ class AddEvent(View):
         if x == True:
             user = request.user
             account = Account.objects.get(user=user)
-            form = AddEventForm(request.POST)
+            form = AddEventForm(request.POST,request.FILES)
             if form.is_valid:
                 form.save()
-                return HttpResponse("events")
+                return redirect('view_events')
             else:
                 context = {'account':account, 'form':form}
             return render(request, 'admin/add_event.html', context)
@@ -248,10 +248,12 @@ class SubmitEntry(View):
             account = Account.objects.get(user=user)
             event = Event.objects.get(id=id)
             form = EntryForm()
-            entry = Entry.objects.get(student=account, event=event)
-            if entry:
-                return redirect('view_events')
-            else:
+            try:
+                entry = Entry.objects.get(student=account, event=event)
+                if entry:
+                    return redirect('view_events')
+            
+            except:
                 context = {'form': form, 'account': account,'event':event}
                 return render(request,'students/submit.html', context)
         else:
@@ -333,6 +335,84 @@ class ViewResults(View):
             return render(request, 'common/results.html', context)
         else:
             return redirect('home')
+
+
+class ApproveEntry(View):
+    def get(self, request,id):
+        x= AdminCheck(request)
+        if x == True:
+            entry = Entry.objects.get(id=id)
+            entry.status = '1'
+            entry.save()
+            event = Event.objects.get(id=entry.event.id)
+            return redirect('view_entry',id=event.id )
+
+class RejectEntry(View):
+    def get(self, request,id):
+        x= AdminCheck(request)
+        if x == True:
+            entry = Entry.objects.get(id=id)
+            entry.status = '3'
+            entry.save()
+            event = Event.objects.get(id=entry.event.id)
+            return redirect('view_entry',id=event.id )
+
+
+class PublicEntryView(View):
+    def get(self, request,id):
+        event = Event.objects.get(id=id)
+        entry = Entry.objects.filter(event=event,status='1')
+        print(entry)
+        context = {'event': event,'entry': entry}
+        return render(request, 'common/public_entry.html', context)
+
+
+
+class AddLiveEvent(View):
+    def get(self, request):
+        x = AdminCheck(request)
+        if x == True:
+            user = request.user
+            account = Account.objects.get(user=user)
+            form = AddLivedEventForm()
+            context = {'account':account, 'form':form}
+            return render(request, 'admin/add_live_event.html', context)
+        else:
+            return redirect('home')
+
+    def post(self, request):
+        x = AdminCheck(request)
+        if x == True:
+            user = request.user
+            account = Account.objects.get(user=user)
+            form = AddLivedEventForm(request.POST,request.FILES)
+            if form.is_valid:
+                form.save()
+                return redirect('view_live_events')
+            else:
+                context = {'account':account, 'form':form}
+            return render(request, 'admin/add__live_event.html', context)
+        else:
+            return redirect('home')
+
+
+class ViewLiveEvents(View):
+    def get(self, request):
+        user = request.user
+        if user.is_authenticated:
+            user = request.user
+            account = Account.objects.get(user=user)
+            event = LiveEvent.objects.all()
+            context = {'account':account,'event': event}
+            return render(request, 'common/live_events.html', context)
+        else:
+            return redirect('index')
+
+
+
+
+
+
         
 
 

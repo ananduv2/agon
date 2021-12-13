@@ -30,3 +30,8 @@ class ResultForm(ModelForm):
     class Meta:
         model = Result
         fields = ['result']
+
+class AddLivedEventForm(ModelForm):
+    class Meta:
+        model = LiveEvent
+        fields = ['name','url','date','time','details']

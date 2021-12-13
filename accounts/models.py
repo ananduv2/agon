@@ -100,6 +100,18 @@ class Result(models.Model):
     event = models.ForeignKey(Event,on_delete=models.CASCADE)
     result = models.TextField()
 
+class LiveEvent(models.Model):
+    name = models.CharField(max_length=1500)
+    url = models.CharField(max_length=1500)
+    date = models.DateField(null=True, blank=True)
+    time = models.TimeField(null=True, blank=True)
+    details = models.TextField(null=True, blank=True)
+
+    def __str__(self):
+        return self.name
+
+
+
     
 
 

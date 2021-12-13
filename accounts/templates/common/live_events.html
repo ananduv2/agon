@@ -18,9 +18,7 @@
                 <ul>
                     <li><a href="{% url 'index' %}"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
                     </li>
-                    <li class="active-bre"><a href="{% url 'view_events' %}"><i class="fa fa-ticket" aria-hidden="true"></i> Event</a>
-                    </li>
-                    <li class="active-bre"><a href="#"> Event Entries</a>
+                    <li class="active-bre"><a href="#">Live Event List</a>
                     </li>
                     <li class="page-back"><a href="{% url 'index' %}"><i class="fa fa-backward" aria-hidden="true"></i> Back</a>
                     </li>
@@ -31,29 +29,27 @@
             <!--== User Details ==-->
             <div class="sb2-2-1">
                 <div class="inn-title">
-                    <h4>All Entries</h4>
+                    <h4>All Live Events</h4>
                 </div>
                 <div class="bor">
                     <table class="table">
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Name</th>
-                                <th>Url</th>
-                                <th>Status</th>
+                                <th>Event Name</th>
+                                <th> Date</th>
+                                <th>Time</th>
+                                <th>Link</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {% for i in entry %}
+                            {% for i in event %}
                             <tr>
                                 <td>{{forloop.counter}}</td>
-                                <td>{{i.student}}</td>
-                                <td><a href="{{i.url}}" target="_blank">Open in New Window</a></td>
-                                <td>{{i.get_status_display}}</td>
-                                {% if i.status == 'Pending'  %}
-                                <td><a href="{% url 'approve_entry' i.id %}">Approve</a></td>
-                                <td><a href="{% url 'approve_entry' i.id %}">Reject</a></td>
-                                {% endif %}
+                                <td>{{i.name}}</td>
+                                <td>{{i.date}}</td>
+                                <td>{{i.time}}</td>
+                                <td><a href="{{i.url}}" target="_blank">Open</a></td>
                             </tr>
                             {% endfor %}
                         </tbody>

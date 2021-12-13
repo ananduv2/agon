@@ -17,7 +17,7 @@
                     <ul>
                         <li><a href="{% url 'index' %}"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
                         </li>
-                        <li class="active-bre"><a href="#"> Add Event</a>
+                        <li class="active-bre"><a href="#"> Add Live Event</a>
                         </li>
                         <li class="page-back"><a href="{% url 'index' %}"><i class="fa fa-backward" aria-hidden="true"></i> Back</a>
                         </li>
@@ -31,7 +31,7 @@
                         <div class="col-md-6">
                             <div class="box-inn-sp">
                                 <div class="inn-title">
-                                    <h4>Add New Event</h4>
+                                    <h4>Add New Live Event</h4>
                                 </div>
                                 <div class="tab-inn">
                                     <form method="post" enctype="multipart/form-data" action>
@@ -44,16 +44,22 @@
                                             </div>
                                         </div>
                                         <div class="row">
+                                            <div class="input-field col s12"> 
+                                                {% render_field form.url class="validate" type="text" %}
+                                                <label for="first_name1">URL</label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
                                             <div class="input-field col s12">
-                                                <p>Entry Date</p>
-                                                {% render_field form.entry_date class="datepicker" placeholder="Entry Date" required="true" type="date" %}
+                                                <p>Date</p>
+                                                {% render_field form.date class="datepicker" placeholder="Entry Date" required="true" type="date" %}
                                                 <!-- <label for="last_name">Entry Date</label> -->
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="input-field col s12">
-                                                <p>Last Date</p>
-                                                {% render_field form.last_date class="validate" required="true" type="date" %}
+                                                <p>Time</p>
+                                                {% render_field form.time class="validate" required="true" type="time" %}
                                                 <!-- <label for="phone">Last Date</label> -->
                                             </div>
                                         </div>
@@ -63,20 +69,7 @@
                                                 <label for="password">Description</label>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="input-field col s12">
-                                                <div class="file-field input-field">
-                                                    <div class="btn">
-                                                        <span>File</span>
-                                                        <input type="file">
-                                                    </div>
-                                                    <div class="file-path-wrapper">
-                                                        {% render_field form.poster class="file-path validate" type="text" %}
-                                                    </div>
-                                                </div>
-                                                
-                                            </div>
-                                        </div>
+                                        
                                         <div class="row">
                                             <div class="input-field col s12">
                                                 <input type="submit" class="btn btn-secondary" value="Submit">

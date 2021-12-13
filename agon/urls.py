@@ -36,12 +36,17 @@ urlpatterns = [
     path('administrator/delete/event/<id>/',DeleteEvent.as_view(), name='delete_event'),
     path('administrator/entry/view/<id>/',ViewEntries.as_view(), name='view_entry'),
     path('administrator/pubish/result/<id>/',PublishResult.as_view(), name='publish_result'),
+    path('administrator/approve/entry/<id>/',ApproveEntry.as_view(), name='approve_entry'),
+    path('administrator/reject/entry/<id>/',RejectEntry.as_view(), name='reject_entry'),
+    path('administrator/add/liveevent/',AddLiveEvent.as_view(), name='add_live_event'),
 
     path('student/dashboard/',StudentDashboard.as_view(), name='student_dashboard'),
     path('student/submit/entry/<id>/',SubmitEntry.as_view(), name='submit_entry'),
 
     path('user/events/',ViewEvents.as_view(), name='view_events'),
+    path('user/live/events/',ViewLiveEvents.as_view(), name='view_liveevents'),
     path('user/results/',ViewResults.as_view(), name='view_results'),
+    path('user/view/entries/<id>/',PublicEntryView.as_view(), name='view_public_entries'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

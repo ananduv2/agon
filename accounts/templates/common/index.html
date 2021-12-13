@@ -13,7 +13,7 @@
                     </a>
                 </div>
                 <ul class="menu">
-                    <li>
+                    <!-- <li>
                         <a href="#0" class="active">Home</a>
                         <ul class="submenu">
                             <li>
@@ -123,7 +123,7 @@
                     </li>
                     <li>
                         <a href="contact.html">contact</a>
-                    </li>
+                    </li> -->
                     <li class="header-button pr-0">
                         <a href="{% url 'login' %}">Login</a>
                     </li>
@@ -140,7 +140,7 @@
 
     <!-- ==========Banner-Section========== -->
     <section class="banner-section">
-        <div class="banner-bg bg_img bg-fixed" data-background="{% static 'assets/images/banner/banner01.jpg' %}"></div>
+        <!-- <div class="banner-bg bg_img bg-fixed" data-background="{% static 'assets/images/banner/banner01.jpg' %}"></div>
         <div class="container">
             <div class="banner-content">
                 <h1 class="title  cd-headline clip"><span class="d-block">book your</span> tickets for 
@@ -152,7 +152,57 @@
                 </h1>
                 <p>Safe, secure, reliable ticketing.Your ticket to live entertainment!</p>
             </div>
-        </div>
+        </div> -->
+        <div class="container">
+            <h2></h2>  
+            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+              <!-- Indicators -->
+              <!-- <ol class="carousel-indicators">
+                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#myCarousel" data-slide-to="1"></li>
+                <li data-target="#myCarousel" data-slide-to="2"></li>
+              </ol> -->
+              <div class="owl-carousel owl-theme blog-slider">
+                <img src="{% static 'bg/1.jpg' %}" alt="blog">
+                <img src="{% static 'bg/2.jpg' %}" alt="blog">
+                <img src="{% static 'bg/3.jpg' %}" alt="blog">
+                <img src="{% static 'bg/4.jpg' %}" alt="blog">
+                <img src="{% static 'bg/5.jpg' %}" alt="blog">
+                <img src="{% static 'bg/6.jpg' %}" alt="blog">
+            </div>
+            <div class="blog-prev">
+                <i class="flaticon-double-right-arrows-angles"></i>
+            </div>
+            <div class="blog-next active">
+                <i class="flaticon-double-right-arrows-angles"></i>
+            </div>
+          
+              <!-- Wrapper for slides -->
+              <!-- <div class="carousel-inner">
+                <div class="item active">
+                  <img src="{% static 'bg/1.jpg' %}" alt="Los Angeles" style="width:100%;">
+                </div>
+          
+                <div class="item">
+                  <img src="{% static 'bg/2.jpg' %}" alt="Chicago" style="width:100%;">
+                </div>
+              
+                <div class="item">
+                  <img src="{% static 'bg/3.jpg' %}" alt="New york" style="width:100%;">
+                </div>
+              </div> -->
+          
+              <!-- Left and right controls -->
+              <!-- <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+                <span class="sr-only">Next</span>
+              </a> -->
+            </div>
+          </div>
     </section>
     <!-- ==========Banner-Section========== -->
 
@@ -740,9 +790,10 @@
                             
                             {% for i in events %}
                             <div class="item">
+                                <a href="{% url 'view_public_entries' i.id %}">
                                 <div class="event-grid">
                                     <div class="movie-thumb c-thumb">
-                                        <a href="#0">
+                                        <a href="{% url 'view_public_entries' i.id %}">
                                             <img src="{{i.poster.url}}" alt="event">
                                         </a>
                                         <div class="event-date">
@@ -752,13 +803,13 @@
                                     </div>
                                     <div class="movie-content bg-one">
                                         <h5 class="title m-0">
-                                            <a href="#0">{{i.name}}</a>
+                                            <a href="{% url 'view_public_entries' i.id %}">{{i.name}}</a>
                                         </h5>
                                         <div class="movie-rating-percent">
                                             <span>{{i.entry_date}}-{{i.last_date}}</span>
                                         </div>
                                     </div>
-                                </div>
+                                </div></a>
                             </div>
                             {% endfor %}
                         </div>
@@ -1064,7 +1115,7 @@
 
     <!-- ==========Newslater-Section========== -->
     <footer class="footer-section">
-        <div class="newslater-section padding-bottom">
+        <!-- <div class="newslater-section padding-bottom">
             <div class="container">
                 <div class="newslater-container bg_img" data-background="{% static 'assets/images/newslater/newslater-bg01.jpg' %}">
                     <div class="newslater-wrapper">
@@ -1078,9 +1129,9 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <div class="container">
-            <div class="footer-top">
+            <!-- <div class="footer-top">
                 <div class="logo">
                     <a href="index-1.html">
                         <img src="{% static 'assets/images/footer/footer-logo.png' %}" alt="footer">
@@ -1137,7 +1188,7 @@
                         </li>
                     </ul>
                 </div>
-            </div>
+            </div> -->
         </div>
     </footer>
 
