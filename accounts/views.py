@@ -55,6 +55,36 @@ class LogoutView(View):
         return redirect('login')
 
 
+class PasswordChangeView(View):
+    def get(self, request):
+        user = request.user
+        if user.is_authenticated: 
+            form = PasswordChangeForm(user=user)
+            user = request.user
+            account = Account.objects.get(user=user)
+            context = {'form': form, 'account': account}
+            return render(request,'common/password_change.html',context)
+        else:
+            return redirect('logout')
+
+    def poster(self, request):
+        user = request.user
+        if user.is_authenticated: 
+            form = PasswordChangeForm(request.POST,user=user)
+            user = request.user
+            account = Account.objects.get(user=user)
+            if form.is_valid():
+                form.save()
+                return redirect('home')
+            else:
+                context = {'form': form, 'account': account}
+                return render(request,'common/password_change.html',context)
+        else:
+            return redirect('home')
+                
+
+
+
 class Home(View):
     def get(self, request):
         user = request.user
@@ -269,6 +299,7 @@ class SubmitEntry(View):
                 f = form.save(commit=False)
                 f.student = account
                 f.event = event
+                f.status = '2'
                 f.save()
                 return redirect('view_events')
             else:
@@ -388,7 +419,7 @@ class AddLiveEvent(View):
             form = AddLivedEventForm(request.POST,request.FILES)
             if form.is_valid:
                 form.save()
-                return redirect('view_live_events')
+                return redirect('view_liveevents')
             else:
                 context = {'account':account, 'form':form}
             return render(request, 'admin/add__live_event.html', context)
@@ -407,6 +438,67 @@ class ViewLiveEvents(View):
             return render(request, 'common/live_events.html', context)
         else:
             return redirect('index')
+
+
+class EditProfile(View):
+    def get(self, request):
+        user = request.user
+        if user.is_authenticated:
+            user = request.user
+            account = Account.objects.get(user=user)
+            form = EditStudentProfile(instance=account)
+            context = {'account':account,'form':form}
+            return render(request, 'students/edit_profile.html', context)
+        else:
+            return redirect('index')
+
+    def post(self, request):
+        user = request.user
+        if user.is_authenticated:
+            user = request.user
+            account = Account.objects.get(user=user)
+            form = EditStudentProfile(request.POST,request.FILES,instance=account)
+            if form.is_valid():
+                form.save()
+                return redirect('home')
+            else:
+                context = {'account':account,'form':form}
+                return render(request, 'students/edit_profile.html', context)
+        else:
+            return redirect('index')
+                
+class EditAdminProfile(View):
+    def get(self, request):
+        x = AdminCheck(request)
+        if x == True:
+            user = request.user
+            account = Account.objects.get(user=user)
+            form = EditStudentProfile(instance=account)
+            context = {'account':account,'form':form}
+            return render(request,'admin/edit_profile.html',context)
+        else:
+            return redirect('home')
+
+    def post(self, request):
+        user = request.user
+        if user.is_authenticated:
+            user = request.user
+            account = Account.objects.get(user=user)
+            form = EditStudentProfile(request.POST,request.FILES,instance=account)
+            if form.is_valid():
+                form.save()
+                return redirect('home')
+            else:
+                context = {'account':account,'form':form}
+                return render(request, 'admin/edit_profile.html', context)
+        else:
+            return redirect('index')
+
+
+
+
+
+
 
 
 

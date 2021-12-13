@@ -35,3 +35,13 @@ class AddLivedEventForm(ModelForm):
     class Meta:
         model = LiveEvent
         fields = ['name','url','date','time','details']
+
+class EditStudentProfile(ModelForm):
+    class Meta:
+        model = Account
+        fields = ['name','email','profilepic','mob']
+
+class EditAdminProfile(ModelForm):
+    class Meta:
+        model = Account
+        fields = ['name','email','profilepic','mob']

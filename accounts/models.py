@@ -92,6 +92,8 @@ class Entry(models.Model):
     event = models.ForeignKey(Event,on_delete=models.CASCADE,null=True, blank=True)
     url = models.CharField(max_length=1500)
     status = models.CharField(max_length=150,choices=approval_choices,default='Pending')
+    remarks = models.TextField(max_length=1000,null=True, blank=True)
+    marked = models.BooleanField(default=False)
 
     def __str__(self):
         return ("%s_%s") % (self.student,self.event)

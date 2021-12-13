@@ -31,8 +31,13 @@
 
             <!-- Dropdown Structure -->
             <ul id='top-menu' class='dropdown-content top-menu-sty'>
-                <li><a href="setting.html" class="waves-effect"><i class="fa fa-user" aria-hidden="true"></i>My Profile</a>
+                {% if account.type == 'student' %}
+                <li><a href="{% url 'edit_student_profile' %}" class="waves-effect"><i class="fa fa-user" aria-hidden="true"></i>My Profile</a>
                 </li>
+                {% else %}
+                <li><a href="{% url 'edit_admin_profile' %}" class="waves-effect"><i class="fa fa-user" aria-hidden="true"></i>My Profile</a>
+                </li>
+                {% endif %}
                 <!-- <li><a href="listing-all.html" class="waves-effect"><i class="fa fa-list-ul" aria-hidden="true"></i> Listings</a>
                 </li>
                 <li><a href="hotel-all.html" class="waves-effect"><i class="fa fa-building-o" aria-hidden="true"></i> Hotels</a>

@@ -39,9 +39,11 @@ urlpatterns = [
     path('administrator/approve/entry/<id>/',ApproveEntry.as_view(), name='approve_entry'),
     path('administrator/reject/entry/<id>/',RejectEntry.as_view(), name='reject_entry'),
     path('administrator/add/liveevent/',AddLiveEvent.as_view(), name='add_live_event'),
+    path('administrator/edit/profile/',EditAdminProfile.as_view(), name='edit_admin_profile'),
 
     path('student/dashboard/',StudentDashboard.as_view(), name='student_dashboard'),
     path('student/submit/entry/<id>/',SubmitEntry.as_view(), name='submit_entry'),
+    path('student/edit/profile/',EditProfile.as_view(), name='edit_student_profile'),
 
     path('user/events/',ViewEvents.as_view(), name='view_events'),
     path('user/live/events/',ViewLiveEvents.as_view(), name='view_liveevents'),
